@@ -7,8 +7,10 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import * as API from './api';
 import { useState } from 'react';
 import _ from 'lodash';
+// import * as API from './api';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -31,8 +33,9 @@ const Search = styled('div')(({ theme }) => ({
 function useInput(defaultValue) {
   const [value, setValue] = useState(defaultValue);
   const onChange = _.debounce(e => {
+    API.Users.getUser(e.target.value).then(res => { console.log(res) });
     console.log({value: e.target.value});
-    // setValue(e.target.value)
+    // setValue(e.target.value || ' ')
   }, 600);
 
   return {
@@ -74,9 +77,6 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -87,9 +87,6 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
