@@ -66,20 +66,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// function useInput(defaultValue) {
-//   const [value, setValue] = useState(defaultValue);
-//   function onChange(e) {
-//     setValue(e.target.value);
-//   }
-//   console.log({ value, onChange })
-//   return {
-//     value,
-//     onChange,
-//   };
-// }
-
-
-
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -87,17 +73,6 @@ export default function PrimarySearchAppBar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  // let search = _.debounce((text) => {
-  //   // const [value, setValue] = useState(text);
-  //   console.log({ text })
-  //   this.props.onTextInputAdd(text);
-  //   if (text) {
-  //    this.props.onSearchTypeResult(this.props.tab, text)
-  //   } else {
-  //     this.props.onLoadDefaultInfo(this.props.tab);
-  //   }
-  // }, 300);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -157,7 +132,7 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const inputProps = useInput();
+  const inputProps = useInput('');
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
