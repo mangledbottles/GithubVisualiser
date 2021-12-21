@@ -132,7 +132,7 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const inputProps = useInput('');
+  const inputProps = useInput();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -155,7 +155,7 @@ export default function PrimarySearchAppBar() {
               {...inputProps}
               placeholder="Github Username..."
               inputProps={{ 'aria-label': 'search' }}
-              value={inputProps.value}
+              // value={inputProps.value}
             />
           </Search>
 
