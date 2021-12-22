@@ -1,4 +1,4 @@
-// import Button from "@mui/material/Button";
+import * as React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 const Item = styled(Paper)(({ theme }) => ({
@@ -14,6 +14,8 @@ import Navbar from "./Navbar.tsx";
 import Box from "@mui/material/Box";
 
 export default function Home() {
+  const [username, setUsername] = React.useState(['', '']);
+  const [user, setUser] = React.useState([]);
   return (
     <div>
       <Navbar />
