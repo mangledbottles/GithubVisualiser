@@ -1,4 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
+import _ from "lodash";
+
+// Import Material UI components
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -7,13 +11,13 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+
+// Import the API
 import * as API from "./api";
-import { useState } from "react";
-import _ from "lodash";
-import Autocomplete from "@mui/material/Autocomplete";
 
 // Import TS Interfaces
 import { User } from "../utils/interfaces/User.interface";
+import { Repositories, Repository } from "../utils/interfaces/Repository.interface";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-export default function PrimarySearchAppBar({ setUsername, setUser }) {
+export default function PrimarySearchAppBar({ setUsername, setUser, setRepositories }) {
   // Creating a custom hook
   function useInput(defaultValue) {
     const [value, setValue] = useState(defaultValue);
@@ -65,11 +69,16 @@ export default function PrimarySearchAppBar({ setUsername, setUser }) {
       API.Users.getUser(e.target.value).then((res: User) => {
         console.log(res);
         setUser(res);
+        setUsername(e.target.value);
       });
-      console.log({ value: e.target.value });
-      setUsername(e.target.value);
-      // setValue(e.target.value || ' ')
-    }, 600);
+
+      API.Repositories.getRespositories(e.target.value).then((res: Repositories) => {
+        console.log(res);
+        setRepositories(res || [null]);
+        console.log({ res })
+      });
+
+    }, 1200);
 
     return {
       value,

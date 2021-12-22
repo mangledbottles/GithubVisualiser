@@ -15,9 +15,10 @@ import Repositories from "./Repositories.tsx";
 export default function Home() {
   const [username, setUsername] = React.useState(['', '']);
   const [user, setUser] = React.useState([]);
+  const [repositories, setRepositories] = React.useState([{}, '']);
   return (
     <div>
-      <Navbar setUsername={setUsername} setUser={setUser} />
+      <Navbar setUsername={setUsername} setUser={setUser} setRepositories={setRepositories} />
       <Box
         sx={{
           display: "flex",
@@ -27,25 +28,12 @@ export default function Home() {
           },
         }}
       >
-        <Container maxWidth="sm">
-        <Profile username={username} user={user} />
-
-{/* 
-          <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Item>xs=8</Item>
-            </Grid>
-            <Grid item xs={4}>
-              <Item>xs=4</Item>
-            </Grid>
-            <Grid item xs={4}>
-              <Item>xs=4</Item>
-            </Grid>
-            <Grid item xs={8}>
-              <Item>xs=8</Item>
-            </Grid>
-          </Grid> */}
-        </Container>
+        {/* <Container maxWidth="sm"> */}
+        <Grid sx={{ flexGrow: 0 }} container spacing={2}>
+          <Profile username={username} user={user} />
+          <Repositories repositories={repositories} />
+        </Grid>
+        {/* </Container> */}
       </Box>
     </div>
   );
