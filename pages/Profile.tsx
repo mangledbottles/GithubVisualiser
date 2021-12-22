@@ -13,10 +13,11 @@ import { User } from "../utils/interfaces/User.interface";
 export default function UserProfile({ username, user }: { username: string, user: User }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
+      {/* @ts-ignore */}
       <CardMedia
         component="img"
         alt="green iguana"
-        height="140"
+        maxHeight="50vh"
         image={user.avatar_url}
       />
       <CardContent>
