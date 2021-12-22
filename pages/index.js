@@ -12,13 +12,16 @@ import Paper from "@mui/material/Paper";
 import Navbar from "./Navbar.tsx";
 
 import Box from "@mui/material/Box";
+import Profile from "./Profile.tsx";
+
+
 
 export default function Home() {
   const [username, setUsername] = React.useState(['', '']);
   const [user, setUser] = React.useState([]);
   return (
     <div>
-      <Navbar />
+      <Navbar setUsername={setUsername} setUser={setUser} />
       <Box
         sx={{
           display: "flex",
@@ -29,6 +32,9 @@ export default function Home() {
         }}
       >
         <Container maxWidth="sm">
+        <Profile username={username} user={user} />
+
+{/* 
           <Grid container spacing={2}>
             <Grid item xs={8}>
               <Item>xs=8</Item>
@@ -42,7 +48,7 @@ export default function Home() {
             <Grid item xs={8}>
               <Item>xs=8</Item>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Container>
       </Box>
     </div>
