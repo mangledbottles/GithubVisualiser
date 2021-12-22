@@ -28,8 +28,8 @@ export default function Home() {
           },
         }}
       >
-        {/* <Container maxWidth="sm"> */}
-        <Grid sx={{ flexGrow: 0 }} container spacing={2}>
+        {/* Grid to take all available */}
+        <Grid sx={{ flexGrow: 0 }} width="100vw" container spacing={2}>
           <Profile username={username} user={user} />
           <Repositories repositories={repositories} />
         </Grid>
