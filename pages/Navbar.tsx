@@ -17,7 +17,10 @@ import * as API from "./api";
 
 // Import TS Interfaces
 import { User } from "../utils/interfaces/User.interface";
-import { Repositories, Repository } from "../utils/interfaces/Repository.interface";
+import {
+  Repositories,
+  Repository,
+} from "../utils/interfaces/Repository.interface";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,25 +62,41 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+export default function PrimarySearchAppBar({
+  user,
+  setUsername,
+  setUser,
+  setRepositories,
+}) {
+  // Initialise the state for User and Repositories on the page
+  if (user.length == 0) {
+    console.log("updaing user and repos");
+    updateUser("mangledbottles");
+    updateRepositories("mangledbottles");
+  }
 
-export default function PrimarySearchAppBar({ setUsername, setUser, setRepositories }) {
-  // Creating a custom hook
+  function updateUser(username: String) {
+    API.Users.getUser(username).then((userDetails: User) => {
+      console.log(userDetails);
+      setUser(userDetails);
+      setUsername(username);
+    });
+  }
+
+  function updateRepositories(username: String) {
+    API.Repositories.getRespositories(username).then((repos: Repositories) => {
+      console.log(repos);
+      setRepositories(repos || []);
+    });
+  }
+
   function useInput(defaultValue) {
     const [value, setValue] = useState(defaultValue);
 
+    // Debounce the input to avoid unnecessary API calls
     const onChange = _.debounce((e) => {
-      API.Users.getUser(e.target.value).then((res: User) => {
-        console.log(res);
-        setUser(res);
-        setUsername(e.target.value);
-      });
-
-      API.Repositories.getRespositories(e.target.value).then((res: Repositories) => {
-        console.log(res);
-        setRepositories(res || [null]);
-        console.log({ res })
-      });
-
+      updateUser(e.target.value);
+      updateRepositories(e.target.value);
     }, 1200);
 
     return {

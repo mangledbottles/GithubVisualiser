@@ -18,7 +18,7 @@ export default function Home() {
   const [repositories, setRepositories] = React.useState([{}, '']);
   return (
     <div>
-      <Navbar setUsername={setUsername} setUser={setUser} setRepositories={setRepositories} />
+      <Navbar user={user} setUsername={setUsername} setUser={setUser} setRepositories={setRepositories} />
       <Box
         sx={{
           display: "flex",
