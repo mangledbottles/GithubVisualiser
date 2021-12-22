@@ -1,13 +1,14 @@
 import * as React from "react";
+
+// Import Material UI components
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import Divider from "@mui/material/Divider";
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 // Import TS Interfaces
 import { Repository } from "../utils/interfaces/Repository.interface";
@@ -29,12 +30,13 @@ export default function Repositories({ repositories }) {
             <ListItem key={repository.id}>
               <ListItemAvatar>
                 <Avatar>
-                  <ImageIcon />
+                  <GitHubIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
                 primary={repository.name}
-                secondary={repository.created_at}
+                secondary={`Main Language: ${repository.language}`}
+                onClick={() => { alert(repository.name) }}
               />
             </ListItem>
             <Divider variant="inset" component="li" />
