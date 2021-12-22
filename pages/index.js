@@ -1,18 +1,14 @@
 import * as React from "react";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Navbar from "./Navbar.tsx";
 
+// Import Material UI components
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
+// Import components
+import Navbar from "./Navbar.tsx";
 import Profile from "./Profile.tsx";
+import Repositories from "./Repositories.tsx";
 
 
 
