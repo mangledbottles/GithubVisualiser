@@ -19,6 +19,21 @@ import * as API from "./api";
 
 export default function Repositories({ repositories, setCommits }) {
   function getCommitHistory(username, repository) {
+    API.Repositories.getCommitHistory(username, repository).then(commits => {
+      console.log({ commits });
+      let commitByDate = new Map();
+      let commitHistory = [];
+      commits.forEach(commit => {
+        // Count amount of commits per date
+        let commitDate = (commit.commit.author.date).split("T")[0];
+        if (commitByDate.has(commitDate)) {
+          commitByDate.set(commitDate, commitByDate.get(commitDate) + 1);
+        } else {
+          commitByDate.set(commitDate, 1);
+        }
+      });
+
+    });
   }
 
 export default function Repositories({ repositories }) {
