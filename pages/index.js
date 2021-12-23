@@ -15,6 +15,7 @@ export default function Home() {
   const [username, setUsername] = React.useState(["", ""]);
   const [user, setUser] = React.useState([]);
   const [repositories, setRepositories] = React.useState([{}, ""]);
+  const [commits, setCommits] = React.useState([[], ""]);
   return (
     <div>
       <Navbar
@@ -35,8 +36,8 @@ export default function Home() {
         {/* Grid to take all available */}
         <Grid sx={{ flexGrow: 0 }} width="100vw" container spacing={2}>
           <Profile username={username} user={user} />
-          <Repositories repositories={repositories} />
-          <Graphs />
+          <Repositories repositories={repositories} setCommits={setCommits} />
+          <Graphs commits={commits} />
         </Grid>
         {/* </Container> */}
       </Box>
