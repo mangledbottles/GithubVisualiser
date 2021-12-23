@@ -90,14 +90,7 @@ export default function graphs({ commits }) {
       .attr("text-anchor", "end")
       .attr("fill", "orange") //  Temperature(y-axis) color
       .attr("font-size", "0.75rem"); // Temperature(y-axis) font size
-    // };
 
-    // update([
-    //   { date: 1, commits: 1 },
-    //   { date: 2, commits: 2 },
-    //   { date: 3, commits: 3 },
-    // ]);
-    // update(commits)
   }, [commits]);
   return (
     <Card sx={{ maxWidth: 600 }}>
