@@ -9,16 +9,20 @@ import Grid from "@mui/material/Grid";
 import Navbar from "./Navbar.tsx";
 import Profile from "./Profile.tsx";
 import Repositories from "./Repositories.tsx";
-
-
+import Graphs from "./Graphs.tsx";
 
 export default function Home() {
-  const [username, setUsername] = React.useState(['', '']);
+  const [username, setUsername] = React.useState(["", ""]);
   const [user, setUser] = React.useState([]);
-  const [repositories, setRepositories] = React.useState([{}, '']);
+  const [repositories, setRepositories] = React.useState([{}, ""]);
   return (
     <div>
-      <Navbar user={user} setUsername={setUsername} setUser={setUser} setRepositories={setRepositories} />
+      <Navbar
+        user={user}
+        setUsername={setUsername}
+        setUser={setUser}
+        setRepositories={setRepositories}
+      />
       <Box
         sx={{
           display: "flex",
@@ -32,6 +36,7 @@ export default function Home() {
         <Grid sx={{ flexGrow: 0 }} width="100vw" container spacing={2}>
           <Profile username={username} user={user} />
           <Repositories repositories={repositories} />
+          <Graphs />
         </Grid>
         {/* </Container> */}
       </Box>
