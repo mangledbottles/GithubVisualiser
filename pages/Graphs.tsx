@@ -61,7 +61,7 @@ export default function graphs({ commits }) {
       .attr("height", (d) => chartHeight - yScale(d.commits))
       .attr("x", (d) => xScale(d.date))
       .attr("y", (d) => yScale(d.commits))
-      .style("fill", "orange");
+      .style("fill", "#023047");
 
     rects
       .enter()
@@ -72,7 +72,7 @@ export default function graphs({ commits }) {
       .transition()
       .duration(1000)
       .attr("height", (d) => chartHeight - yScale(d.commits))
-      .style("fill", "orange"); // Bar color
+      .style("fill", "#023047"); // Bar color
 
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
@@ -82,13 +82,13 @@ export default function graphs({ commits }) {
       .selectAll("text")
       .attr("text-anchor", "end")
       .attr("transform", "rotate(-40)") // tilt the timestamps by 40 degrees
-      .attr("fill", "orange") // Timestamp(x-axis) color
+      .attr("fill", "#FFB703") // Timestamp(x-axis) color
       .attr("font-size", "0.5rem"); //  Timestamp(x-axis) font size
 
     yAxisGroup
       .selectAll("text")
       .attr("text-anchor", "end")
-      .attr("fill", "orange") //  Temperature(y-axis) color
+      .attr("fill", "#FFB703") //  Temperature(y-axis) color
       .attr("font-size", "0.75rem"); // Temperature(y-axis) font size
 
   }, [commits]);
