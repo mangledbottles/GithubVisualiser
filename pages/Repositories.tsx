@@ -12,6 +12,14 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 // Import TS Interfaces
 import { Repository } from "../utils/interfaces/Repository.interface";
+import { getCommitHistory } from "./api/Repositories";
+
+// Import API
+import * as API from "./api";
+
+export default function Repositories({ repositories, setCommits }) {
+  function getCommitHistory(username, repository) {
+  }
 
 export default function Repositories({ repositories }) {
   return (
@@ -36,7 +44,7 @@ export default function Repositories({ repositories }) {
               <ListItemText
                 primary={repository.name}
                 secondary={`Main Language: ${repository.language}`}
-                onClick={() => { alert(repository.name) }}
+                onClick={() => { getCommitHistory(repository.owner.login, repository.name); }}
               />
             </ListItem>
             <Divider variant="inset" component="li" />
