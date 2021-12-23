@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
 
-export default function graphs() {
+export default function graphs({ commits }) {
   React.useEffect(() => {
     const svgWidth = 800;
     const svgHeight = 600;
@@ -46,14 +46,14 @@ export default function graphs() {
     const yAxis = d3
       .axisLeft(yScale)
       .ticks(10)
-      .tickFormat((d) => `${d} degrees`);
+      .tickFormat((d) => `${d} commits`);
 
-    const update = (data) => {
+    // const update = (data) => {
       // Handle the scaling domains
-      xScale.domain(data.map((item) => item.date));
-      yScale.domain([0, d3.max(data, (d) => d.temp)]);
+      xScale.domain(commits.map((item) => item.date));
+      yScale.domain([0, d3.max(commits, (d) => d.commits)]);
 
-      const rects = chart.selectAll("rect").data(data);
+      const rects = chart.selectAll("rect").data(commits);
 
       //Remove extra nodes from the DOM
       rects.exit().remove();
@@ -61,20 +61,20 @@ export default function graphs() {
       // Initial chart scaling and styling for entries
       rects
         .attr("width", xScale.bandwidth)
-        .attr("height", (d) => chartHeight - yScale(d.temp))
+        .attr("height", (d) => chartHeight - yScale(d.commits))
         .attr("x", (d) => xScale(d.date))
-        .attr("y", (d) => yScale(d.temp))
+        .attr("y", (d) => yScale(d.commits))
         .style("fill", "orange");
 
       rects
         .enter()
         .append("rect")
         .attr("x", (d) => xScale(d.date))
-        .attr("y", (d) => yScale(d.temp))
+        .attr("y", (d) => yScale(d.commits))
         .attr("width", xScale.bandwidth)
         .transition()
         .duration(1000)
-        .attr("height", (d) => chartHeight - yScale(d.temp))
+        .attr("height", (d) => chartHeight - yScale(d.commits))
         .style("fill", "orange"); // Bar color
 
       xAxisGroup.call(xAxis);
@@ -93,13 +93,14 @@ export default function graphs() {
         .attr("text-anchor", "end")
         .attr("fill", "orange") //  Temperature(y-axis) color
         .attr("font-size", "0.75rem"); // Temperature(y-axis) font size
-    };
+    // };
 
-    update([
-      { date: 1, temp: 1 },
-      { date: 2, temp: 2 },
-      { date: 3, temp: 3 },
-    ]);
-  }, []);
+    // update([
+    //   { date: 1, commits: 1 },
+    //   { date: 2, commits: 2 },
+    //   { date: 3, commits: 3 },
+    // ]);
+    // update(commits)
+  }, [commits]);
   return <div className="canvas"></div>;
 }
