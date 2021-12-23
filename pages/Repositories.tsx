@@ -7,7 +7,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { Typography } from "@mui/material";
+import Stack  from "@mui/material/Stack";
 
 // Import TS Interfaces
 import { Repository } from "../utils/interfaces/Repository.interface";
@@ -18,13 +20,13 @@ import * as API from "./api";
 
 export default function Repositories({ repositories, setCommits }) {
   function getCommitHistory(username, repository) {
-    API.Repositories.getCommitHistory(username, repository).then(commits => {
+    API.Repositories.getCommitHistory(username, repository).then((commits) => {
       console.log({ commits });
       let commitByDate = new Map();
       let commitHistory = [];
-      commits.forEach(commit => {
+      commits.forEach((commit) => {
         // Count amount of commits per date
-        let commitDate = (commit.commit.author.date).split("T")[0];
+        let commitDate = commit.commit.author.date.split("T")[0];
         if (commitByDate.has(commitDate)) {
           commitByDate.set(commitDate, commitByDate.get(commitDate) + 1);
         } else {
@@ -50,8 +52,8 @@ export default function Repositories({ repositories, setCommits }) {
         currentDate.setDate(currentDate.getDate() + 1);
       }
       const commitHistoryDate = [];
-      dateArray.forEach(date => {
-        let commit = commitHistory.find(commit => commit.date === date);
+      dateArray.forEach((date) => {
+        let commit = commitHistory.find((commit) => commit.date === date);
         if (commit) {
           commitHistoryDate.push({ date, commits: commit.commits });
         } else {
@@ -66,34 +68,43 @@ export default function Repositories({ repositories, setCommits }) {
   }
 
   return (
-    <List
-      sx={{
-        width: "100%",
-        maxWidth: 360,
-        bgcolor: "background.paper",
-        overflow: "auto",
-        maxHeight: "50vh",
-      }}
-    >
-      {repositories?.map((repository: Repository) => {
-        return (
-          <>
-            <ListItem key={repository.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  <GitHubIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={repository.name}
-                secondary={`Main Language: ${repository.language}`}
-                onClick={() => { getCommitHistory(repository.owner.login, repository.name); }}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </>
-        );
-      })}
-    </List>
+    <>
+      <Stack spacing={2}>
+        <Typography variant="h5" component="h5">
+          Select repository
+        </Typography>
+        <List
+          sx={{
+            width: "100%",
+            maxWidth: 360,
+            bgcolor: "background.paper",
+            overflow: "auto",
+            maxHeight: "50vh",
+          }}
+        >
+          {repositories?.map((repository: Repository) => {
+            return (
+              <>
+                <ListItem key={repository.id}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <GitHubIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={repository.name}
+                    secondary={`Main Language: ${repository.language}`}
+                    onClick={() => {
+                      getCommitHistory(repository.owner.login, repository.name);
+                    }}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </>
+            );
+          })}
+        </List>
+      </Stack>
+    </>
   );
 }
