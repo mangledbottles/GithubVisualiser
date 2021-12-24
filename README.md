@@ -1,6 +1,9 @@
 # Github Visualiser
 This project uses the [Github REST API](https://docs.github.com/en/rest) to visualise repository commits per day using [D3js](https://d3js.org) written in Next.js (React)
 
+![Explanation](/public/explanation.gif)
+
+
 ## Getting Started
 **Installation of the project**
 ```bash
